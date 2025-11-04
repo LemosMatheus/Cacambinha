@@ -18,7 +18,10 @@
 //SENSOR_LINHA_MAIS_DIREITO			A0	
 //-----PINOS PARA SENSORES REFLETANCIA-----//
 
-#define DIVISOR_BRANCO_PRETO 80
+#define DIVISOR_BRANCO_PRETO_MAIS_ESQ 75
+#define DIVISOR_BRANCO_PRETO_MAIS_DIR 85
+#define DIVISOR_BRANCO_PRETO_DIR 60
+#define DIVISOR_BRANCO_PRETO_ESQ 75
 
 float valorSensorDir;
 float valorSensorEsq;
@@ -37,28 +40,28 @@ void loop(){
   valorSensorMaisDir = robo.lerSensorLinhaMaisDir();
 
 	//Identifica se os dois sensores viram branco
-	if(valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisDir < DIVISOR_BRANCO_PRETO){
+	if(valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir < DIVISOR_BRANCO_PRETO_MAIS_DIR){
 		robo.acionarMotores(0,0);	//Aciona os dois motores com a mesma velocidade
-	} else if(valorSensorDir > DIVISOR_BRANCO_PRETO && valorSensorEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(40, 40);
-  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(40, 40);
-  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(-40, 40);
-  } else if (valorSensorDir > DIVISOR_BRANCO_PRETO && valorSensorEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(-40, 40);
-  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir < DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(40, -40);
-  } else if (valorSensorDir > DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO){
-    robo.acionarMotores(-40, 40);
-  } else if(valorSensorDir > DIVISOR_BRANCO_PRETO && valorSensorEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO) {
-    robo.acionarMotores(-40, 40);
-  }else if(valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir < DIVISOR_BRANCO_PRETO) {
-    robo.acionarMotores(40, -40);
-  }else if(valorSensorDir < DIVISOR_BRANCO_PRETO && valorSensorEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir > DIVISOR_BRANCO_PRETO) {
-    robo.acionarMotores(40, -40);
-  }else if(valorSensorDir > DIVISOR_BRANCO_PRETO && valorSensorEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO && valorSensorMaisDir < DIVISOR_BRANCO_PRETO) {
-    robo.acionarMotores(40, -40);
+	} else if(valorSensorDir > DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq > DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(35, 30);//DIREITA BRANCO, ESQUERDA BRANCO, MAIS ESQUERDA BRANCO, MAIS DIREITA BRANCO
+  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(35, 30);//DIREITA PRETO, ESQUERDA PRETO, MAIS ESQUERDA BRANCO, MAIS DIREITA BRANCO
+  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(-80, 60);//DIREITA PRETO, ESQUERDA PRETO, MAIS ESQUERDA PRETO, MAIS DIREITA BRANCO
+  } else if (valorSensorDir > DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq > DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(-35, 30);//DIREITA BRANCO, ESQUERDA BRANCO, MAIS ESQUERDA PRETO, MAIS DIREITA BRANCO
+  } else if (valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir < DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(60, -80);//DIREITA PRETO, ESQUERDA PRETO, MAIS ESQUERDA BRANCO, MAIS DIREITA PRETO
+  } else if (valorSensorDir > DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR){
+    robo.acionarMotores(-35, 30);//DIREITA BRANCO, ESQUERDA PRETO, MAIS ESQUERDA BRANCO, MAIS DIREITA BRANCO
+  } else if(valorSensorDir > DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq < DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq < DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR) {
+    robo.acionarMotores(-80, 60);//DIREITA BRANCO, ESQUERDA PRETO, MAIS ESQUERDA PRETO, MAIS DIREITA BRANCO
+  }else if(valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq > DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir < DIVISOR_BRANCO_PRETO_MAIS_DIR) {
+    robo.acionarMotores(60, -80);//DIREITA PRETO, ESQUERDA BRANCO, MAIS ESQUERDA BRANCO, MAIS DIREITA PRETO
+  }else if(valorSensorDir < DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq > DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir > DIVISOR_BRANCO_PRETO_MAIS_DIR) {
+    robo.acionarMotores(35, -30);//DIREITA PRETO, ESQUERDA BRANCO, MAIS ESQUERDA BRANCO, MAIS DIREITA BRANCO
+  }else if(valorSensorDir > DIVISOR_BRANCO_PRETO_DIR && valorSensorEsq > DIVISOR_BRANCO_PRETO_ESQ && valorSensorMaisEsq > DIVISOR_BRANCO_PRETO_MAIS_ESQ && valorSensorMaisDir < DIVISOR_BRANCO_PRETO_MAIS_DIR) {
+    robo.acionarMotores(35, -30);//DIREITA BRANCO, ESQUERDA BRANCO, MAIS ESQUERDA BRANCO, MAIS DIREITA PRETO
   }
 
 }
